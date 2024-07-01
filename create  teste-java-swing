@@ -1,0 +1,47 @@
+import javax.swing.*;
+import java.awt.event.*;
+
+public class SwingExample {
+    private JFrame frame;
+    private JTextField textField;
+    private JTextArea textArea;
+    
+    public SwingExample() {
+        frame = new JFrame("Exemplo Swing");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JPanel panel = new JPanel();
+        
+        JLabel label = new JLabel("Digite algo:");
+        panel.add(label);
+        
+        textField = new JTextField(20);
+        panel.add(textField);
+        
+        JButton button = new JButton("Exibir texto");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String texto = textField.getText();
+                textArea.append(texto + "\n");
+                textField.setText("");
+            }
+        });
+        panel.add(button);
+        
+        textArea = new JTextArea(10, 30);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        panel.add(scrollPane);
+        
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new SwingExample();
+            }
+        });
+    }
+}
